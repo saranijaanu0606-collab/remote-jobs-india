@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Remote Startup Jobs India</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">🇮🇳 Remote Startup Jobs India</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Jobs</a></li>
+        <li><a href="#post-job">Post a Job</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Find Remote Jobs at Indian Startups</h1>
+    <p>Curated remote opportunities from India's fastest growing startups</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search jobs, skills, companies..." />
+      <button onclick="filterJobs()">Search</button>
+    </div>
+  </header>
+
+  <section class="filters">
+    <div class="container">
+      <button class="filter-btn active" onclick="filterByCategory('all')">All</button>
+      <button class="filter-btn" onclick="filterByCategory('engineering')">Engineering</button>
+      <button class="filter-btn" onclick="filterByCategory('design')">Design</button>
+      <button class="filter-btn" onclick="filterByCategory('marketing')">Marketing</button>
+      <button class="filter-btn" onclick="filterByCategory('product')">Product</button>
+      <button class="filter-btn" onclick="filterByCategory('sales')">Sales</button>
+    </div>
+  </section>
+
+  <main class="container">
+    <div id="job-listings">
+
+      <div class="job-card" data-category="engineering">
+        <div class="job-info">
+          <h2>Frontend Developer</h2>
+          <p class="company">Razorpay · Bangalore · Full-time</p>
+          <div class="tags">
+            <span class="tag green">Remote</span>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+          </div>
+        </div>
+        <div class="job-meta">
+          <span class="salary">₹18–25 LPA</span>
+          <span class="date">2 days ago</span>
+          <a href="#" class="apply-btn">Apply Now</a>
+        </div>
+      </div>
+
+      <div class="job-card" data-category="product">
+        <div class="job-info">
+          <h2>Product Manager</h2>
+          <p class="company">CRED · Mumbai · Full-time</p>
+          <div class="tags">
+            <span class="tag green">Remote</span>
+            <span class="tag">Fintech</span>
+            <span class="tag">B2C</span>
+          </div>
+        </div>
+        <div class="job-meta">
+          <span class="salary">₹22–30 LPA</span>
+          <span class="date">1 day ago</span>
+          <a href="#" class="apply-btn">Apply Now</a>
+        </div>
+      </div>
+
+      <div class="job-card" data-category="design">
+        <div class="job-info">
+          <h2>UI/UX Designer</h2>
+          <p class="company">Zepto · Delhi · Full-time</p>
+          <div class="tags">
+            <span class="tag green">Remote</span>
+            <span class="tag">Figma</span>
+            <span class="tag">Mobile</span>
+          </div>
+        </div>
+        <div class="job-meta">
+          <span class="salary">₹12–18 LPA</span>
+          <span class="date">3 days ago</span>
+          <a href="#" class="apply-btn">Apply Now</a>
+        </div>
+      </div>
+
+      <div class="job-card" data-category="marketing">
+        <div class="job-info">
+          <h2>Growth Marketer</h2>
+          <p class="company">Meesho · Bangalore · Full-time</p>
+          <div class="tags">
+            <span class="tag green">Remote</span>
+            <span class="tag">SEO</span>
+            <span class="tag">Paid Ads</span>
+          </div>
+        </div>
+        <div class="job-meta">
+          <span class="salary">₹10–15 LPA</span>
+          <span class="date">5 days ago</span>
+          <a href="#" class="apply-btn">Apply Now</a>
+        </div>
+      </div>
+
+      <div class="job-card" data-category="engineering">
+        <div class="job-info">
+          <h2>Backend Engineer</h2>
+          <p class="company">Groww · Pune · Full-time</p>
+          <div class="tags">
+            <span class="tag green">Remote</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">AWS</span>
+          </div>
+        </div>
+        <div class="job-meta">
+          <span class="salary">₹20–28 LPA</span>
+          <span class="date">Today</span>
+          <a href="#" class="apply-btn">Apply Now</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <section class="newsletter" id="newsletter">
+    <div class="container">
+      <h2>Get Jobs in Your Inbox</h2>
+      <p>New remote startup jobs delivered every week</p>
+      <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+        <input type="email" id="emailInput" placeholder="Enter your email address" required />
+        <button type="submit">Subscribe Free</button>
+      </form>
+      <p id="newsletter-msg" class="success-msg"></p>
+    </div>
+  </section>
+
+  <section class="post-job" id="post-job">
+    <div class="container">
+      <h2>Post a Remote Job</h2>
+      <p>Reach thousands of talented professionals across India</p>
+      <form class="job-form" onsubmit="submitJob(event)">
+        <div class="form-row">
+          <input type="text" placeholder="Job Title *" required />
+          <input type="text" placeholder="Company Name *" required />
+        </div>
+        <div class="form-row">
+          <input type="text" placeholder="Location (e.g. Bangalore / Pan India)" />
+          <input type="text" placeholder="Salary Range (e.g. ₹10–15 LPA)" />
+        </div>
+        <select>
+          <option value="">Select Category *</option>
+          <option>Engineering</option>
+          <option>Design</option>
+          <option>Product</option>
+          <option>Marketing</option>
+          <option>Sales</option>
+          <option>Operations</option>
+          <option>Finance</option>
+          <option>HR</option>
+        </select>
+        <input type="url" placeholder="Application Link (URL) *" required />
+        <textarea rows="5" placeholder="Job Description *" required></textarea>
+        <input type="email" placeholder="Your Email (for confirmation) *" required />
+        <button type="submit" class="submit-btn">Submit Job — Free</button>
+      </form>
+      <p id="job-form-msg" class="success-msg"></p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>🇮🇳 Remote Startup Jobs India · Built with ❤️ for Indian professionals</p>
+      <p><a href="about.html">About</a> · <a href="mailto:hello@remotestartupjobs.in">Contact</a></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

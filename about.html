@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Remote Startup Jobs India</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .about-hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+      color: white;
+      text-align: center;
+      padding: 4rem 1.5rem;
+    }
+    .about-hero h1 { font-size: 2.2rem; margin-bottom: 1rem; }
+    .about-hero p { opacity: 0.75; font-size: 1.1rem; }
+
+    .about-section {
+      background: white;
+      padding: 4rem 1.5rem;
+    }
+    .about-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .about-grid h2 {
+      font-size: 1.5rem;
+      color: #1a1a2e;
+      margin-bottom: 1rem;
+    }
+    .about-grid p {
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-section {
+      background: #f5f5f5;
+      padding: 4rem 1.5rem;
+    }
+    .contact-section h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+    .contact-section > .container > p {
+      text-align: center;
+      color: #777;
+      margin-bottom: 2rem;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: #e94560; }
+
+    @media (max-width: 700px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">🇮🇳 Remote Startup Jobs India</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Jobs</a></li>
+        <li><a href="index.html#post-job">Post a Job</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="about-hero">
+    <h1>About Us</h1>
+    <p>Connecting India's top talent with remote-first startups</p>
+  </div>
+
+  <section class="about-section">
+    <div class="about-grid">
+      <div>
+        <h2>Our Mission</h2>
+        <p>Remote Startup Jobs India exists to make remote work accessible to every talented professional across India — not just those in Bangalore or Mumbai.</p>
+        <p>We curate verified remote roles from India's fastest-growing startups so you spend less time searching and more time building your career.</p>
+      </div>
+      <div>
+        <h2>Why We Built This</h2>
+        <p>Finding genuine remote jobs at Indian startups was frustratingly hard. Most job boards mix in hybrid roles or international listings that don't fit India's context.</p>
+        <p>We built a focused, no-noise board specifically for remote roles at India-based startups — with real salary ranges in LPA, not USD.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container">
+      <h2>Get in Touch</h2>
+      <p>Questions, partnerships, or feedback? We'd love to hear from you.</p>
+      <form class="contact-form" onsubmit="submitContact(event)">
+        <input type="text" placeholder="Your Name *" required />
+        <input type="email" placeholder="Your Email *" required />
+        <input type="text" placeholder="Subject" />
+        <textarea rows="5" placeholder="Your message *" required></textarea>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+      <p id="contact-msg" class="success-msg" style="margin-top:1rem;"></p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>🇮🇳 Remote Startup Jobs India · Built with ❤️ for Indian professionals</p>
+      <p><a href="about.html">About</a> · <a href="mailto:hello@remotestartupjobs.in">Contact</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function submitContact(e) {
+      e.preventDefault();
+      document.getElementById('contact-msg').textContent = '✅ Message sent! We\'ll get back to you within 48 hours.';
+      e.target.reset();
+    }
+  </script>
+
+</body>
+</html>
