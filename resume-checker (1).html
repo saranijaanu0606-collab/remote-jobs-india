@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free ATS Resume Checker | Remote Jobs India</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f5f7fb;
+      color: #1a1a2e;
+    }
+
+    /* ── NAVBAR (match your existing site) ── */
+    nav {
+      background: #1a1a2e;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-logo {
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .nav-logo span { color: #4f46e5; }
+    .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .nav-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    .nav-links a.active { color: #a78bfa; font-weight: 600; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      color: #fff;
+      text-align: center;
+      padding: 3rem 1rem 2.5rem;
+    }
+    .hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .hero h1 span { color: #a78bfa; }
+    .hero p { color: #aaa; font-size: 1rem; max-width: 600px; margin: 0 auto; }
+
+    /* ── MAIN LAYOUT ── */
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    @media(max-width: 700px) {
+      .input-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+
+    .card label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      color: #1a1a2e;
+    }
+    .card label span {
+      font-weight: 400;
+      color: #888;
+      font-size: 0.85rem;
+    }
+
+    textarea {
+      width: 100%;
+      height: 220px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.9rem;
+      resize: vertical;
+      font-family: inherit;
+      color: #1a1a2e;
+      background: #f8faff;
+      transition: border 0.2s;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: #4f46e5;
+      background: #fff;
+    }
+
+    .analyze-btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.5px;
+    }
+    .analyze-btn:hover { background: #4338ca; }
+    .analyze-btn:active { transform: scale(0.98); }
+
+    /* ── RESULTS ── */
+    #results { display: none; margin-top: 2rem; }
+
+    .score-card {
+      background: #1a1a2e;
+      border-radius: 14px;
+      padding: 2rem;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+    .score-label { font-size: 0.95rem; color: #aaa; margin-bottom: 0.5rem; }
+    .score-number {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .score-number.high { color: #34d399; }
+    .score-number.mid  { color: #fbbf24; }
+    .score-number.low  { color: #f87171; }
+    .score-verdict { font-size: 1rem; margin-top: 0.5rem; color: #ccc; }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    @media(max-width: 600px) { .results-grid { grid-template-columns: 1fr; } }
+
+    .result-card { background: #fff; border-radius: 12px; padding: 1.25rem; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .result-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem; }
+    .result-card h3.found { color: #059669; }
+    .result-card h3.missing { color: #dc2626; }
+    .result-card h3.tips { color: #4f46e5; }
+
+    .keyword-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .kw {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .kw.found { background: #d1fae5; color: #065f46; }
+    .kw.missing { background: #fee2e2; color: #991b1b; }
+
+    .tip-list { list-style: none; padding: 0; }
+    .tip-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.9rem;
+      color: #374151;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .tip-list li:last-child { border-bottom: none; }
+    .tip-list li::before { content: "→"; color: #4f46e5; font-weight: 700; flex-shrink: 0; }
+
+    .reset-btn {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      background: #f1f5f9;
+      color: #1a1a2e;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+    .reset-btn:hover { background: #e2e8f0; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      color: #aaa;
+      font-size: 0.85rem;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+    footer a { color: #4f46e5; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="nav-logo">Remote<span>Jobs</span>India</a>
+  <div class="nav-links">
+    <a href="index.html">Jobs</a>
+    <a href="resume-checker.html" class="active">Resume Checker</a>
+    <a href="#" onclick="return false;">Post a Job</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Free <span>ATS Resume Checker</span></h1>
+  <p>Paste your Job Description and Resume. Get your ATS match score, missing keywords, and tips instantly.</p>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <div class="input-grid">
+    <div class="card">
+      <label>Job Description <span>(paste the full job post)</span></label>
+      <textarea id="jdInput" placeholder="Paste the job description here...&#10;&#10;Example:&#10;We are looking for a React developer with 3+ years experience in JavaScript, Node.js, REST APIs..."></textarea>
+    </div>
+    <div class="card">
+      <label>Your Resume <span>(paste your resume text)</span></label>
+      <textarea id="resumeInput" placeholder="Paste your resume here...&#10;&#10;Example:&#10;Experienced software developer with 4 years in React, JavaScript, Node.js. Built REST APIs at XYZ Company..."></textarea>
+    </div>
+  </div>
+
+  <button class="analyze-btn" onclick="analyzeResume()">Analyze My Resume</button>
+
+  <!-- RESULTS -->
+  <div id="results">
+
+    <div class="score-card">
+      <div class="score-label">ATS Match Score</div>
+      <div class="score-number" id="scoreNumber">0%</div>
+      <div class="score-verdict" id="scoreVerdict"></div>
+    </div>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <h3 class="found">✅ Found Keywords</h3>
+        <div class="keyword-list" id="foundKeywords"></div>
+      </div>
+      <div class="result-card">
+        <h3 class="missing">❌ Missing Keywords</h3>
+        <div class="keyword-list" id="missingKeywords"></div>
+      </div>
+    </div>
+
+    <div class="result-card" style="margin-bottom:1.25rem;">
+      <h3 class="tips">💡 Suggestions to Improve Your Resume</h3>
+      <ul class="tip-list" id="tipsList"></ul>
+    </div>
+
+    <button class="reset-btn" onclick="resetChecker()">Check Another Resume</button>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built with ❤️ by <a href="index.html">Remote Jobs India</a> — Free forever for job seekers</p>
+</footer>
+
+<script>
+  // Keywords to ignore (common words)
+  var STOP_WORDS = {
+    'a':1,'an':1,'the':1,'and':1,'or':1,'but':1,'in':1,'on':1,'at':1,'to':1,
+    'for':1,'of':1,'with':1,'by':1,'from':1,'is':1,'are':1,'was':1,'were':1,
+    'be':1,'been':1,'being':1,'have':1,'has':1,'had':1,'do':1,'does':1,'did':1,
+    'will':1,'would':1,'could':1,'should':1,'may':1,'might':1,'must':1,'can':1,
+    'this':1,'that':1,'these':1,'those':1,'i':1,'we':1,'you':1,'he':1,'she':1,
+    'they':1,'it':1,'our':1,'your':1,'their':1,'its':1,'my':1,'his':1,'her':1,
+    'as':1,'if':1,'then':1,'than':1,'so':1,'not':1,'no':1,'us':1,'up':1,
+    'out':1,'about':1,'into':1,'through':1,'during':1,'before':1,'after':1,
+    'above':1,'below':1,'between':1,'each':1,'both':1,'few':1,'more':1,
+    'most':1,'other':1,'some':1,'such':1,'own':1,'same':1,'very':1,'just':1,
+    'also':1,'well':1,'new':1,'work':1,'using':1,'use':1,'used':1,'role':1,
+    'team':1,'good':1,'strong':1,'ability':1,'skills':1,'experience':1,'year':1,
+    'years':1,'minimum':1,'least':1,'plus':1,'looking':1,'seeking':1,'join':1,
+    'help':1,'across':1,'within':1,'including':1,'required':1,'preferred':1,
+    'responsibilities':1,'requirements':1,'qualifications':1,'location':1,
+    'salary':1,'benefits':1,'company':1,'position':1,'job':1,'candidate':1
+  };
+
+  function extractKeywords(text) {
+    var words = text.toLowerCase()
+      .replace(/[^a-z0-9\s\+\#\.]/g, ' ')
+      .split(/\s+/);
+
+    var freq = {};
+    for (var i = 0; i < words.length; i++) {
+      var w = words[i].trim();
+      if (w.length < 2) continue;
+      if (STOP_WORDS[w]) continue;
+      freq[w] = (freq[w] || 0) + 1;
+    }
+
+    // Sort by frequency, take top 40
+    var sorted = Object.keys(freq).sort(function(a,b){ return freq[b]-freq[a]; });
+    return sorted.slice(0, 40);
+  }
+
+  function analyzeResume() {
+    var jd = document.getElementById('jdInput').value.trim();
+    var resume = document.getElementById('resumeInput').value.trim();
+
+    if (!jd || !resume) {
+      alert('Please paste both Job Description and Resume before analyzing.');
+      return;
+    }
+
+    var jdKeywords = extractKeywords(jd);
+    var resumeLower = resume.toLowerCase();
+
+    var found = [];
+    var missing = [];
+
+    for (var i = 0; i < jdKeywords.length; i++) {
+      var kw = jdKeywords[i];
+      if (resumeLower.indexOf(kw) > -1) {
+        found.push(kw);
+      } else {
+        missing.push(kw);
+      }
+    }
+
+    // Score = found / total jd keywords
+    var total = jdKeywords.length;
+    var score = total > 0 ? Math.round((found.length / total) * 100) : 0;
+
+    // Display score
+    var scoreEl = document.getElementById('scoreNumber');
+    scoreEl.textContent = score + '%';
+    scoreEl.className = 'score-number';
+    if (score >= 70) { scoreEl.classList.add('high'); }
+    else if (score >= 45) { scoreEl.classList.add('mid'); }
+    else { scoreEl.classList.add('low'); }
+
+    var verdict = '';
+    if (score >= 70) verdict = 'Great match! Your resume is well-optimized for this job.';
+    else if (score >= 45) verdict = 'Average match. Add the missing keywords to improve your chances.';
+    else verdict = 'Low match. Tailor your resume to include more keywords from the job description.';
+    document.getElementById('scoreVerdict').textContent = verdict;
+
+    // Found keywords (show top 20)
+    var foundEl = document.getElementById('foundKeywords');
+    foundEl.innerHTML = '';
+    var showFound = found.slice(0, 20);
+    if (showFound.length === 0) {
+      foundEl.innerHTML = '<span style="color:#999;font-size:0.9rem;">None found</span>';
+    }
+    for (var f = 0; f < showFound.length; f++) {
+      var kwEl = document.createElement('span');
+      kwEl.className = 'kw found';
+      kwEl.textContent = showFound[f];
+      foundEl.appendChild(kwEl);
+    }
+
+    // Missing keywords (show top 20)
+    var missingEl = document.getElementById('missingKeywords');
+    missingEl.innerHTML = '';
+    var showMissing = missing.slice(0, 20);
+    if (showMissing.length === 0) {
+      missingEl.innerHTML = '<span style="color:#999;font-size:0.9rem;">None missing — perfect!</span>';
+    }
+    for (var m = 0; m < showMissing.length; m++) {
+      var mkwEl = document.createElement('span');
+      mkwEl.className = 'kw missing';
+      mkwEl.textContent = showMissing[m];
+      missingEl.appendChild(mkwEl);
+    }
+
+    // Tips
+    var tips = [];
+    if (missing.length > 0) {
+      tips.push('Add these missing keywords naturally into your resume: ' + missing.slice(0,5).join(', '));
+    }
+    if (score < 70) {
+      tips.push('Tailor your resume for each job — copy exact phrases from the job description.');
+    }
+    tips.push('Use a clean, single-column format — many ATS systems fail to parse multi-column resumes.');
+    tips.push('Avoid images, tables, or graphics — ATS robots cannot read them.');
+    tips.push('Use standard section headings: Experience, Education, Skills, Certifications.');
+    if (resume.length < 500) {
+      tips.push('Your resume seems short. Add more detail about your projects and achievements.');
+    }
+    tips.push('Include measurable achievements: "Increased sales by 30%" beats "Improved sales".');
+    tips.push('Save your resume as a .docx or plain PDF — some ATS systems reject designed PDFs.');
+
+    var tipsEl = document.getElementById('tipsList');
+    tipsEl.innerHTML = '';
+    for (var t = 0; t < tips.length; t++) {
+      var li = document.createElement('li');
+      li.textContent = tips[t];
+      tipsEl.appendChild(li);
+    }
+
+    // Show results
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function resetChecker() {
+    document.getElementById('jdInput').value = '';
+    document.getElementById('resumeInput').value = '';
+    document.getElementById('results').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
