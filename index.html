@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Remote Startup Jobs India</title>
+  <title>Remote Jobs India</title>
   <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; color: #333; }
@@ -65,7 +65,7 @@ main { padding: 2rem 0; }
 
   <nav class="navbar">
     <div class="nav-container">
-      <a href="index.html" class="logo">🇮🇳 Remote Startup Jobs India</a>
+      <a href="index.html" class="logo">🇮🇳 Remote Jobs India</a>
       <ul class="nav-links">
         <li><a href="index.html">Jobs</a></li>
         <li><a href="#post-job">Post a Job</a></li>
@@ -75,8 +75,8 @@ main { padding: 2rem 0; }
   </nav>
 
   <header class="hero">
-    <h1>Find Remote Jobs at Indian Startups</h1>
-    <p>Curated remote opportunities from India's fastest growing startups</p>
+    <h1>Find Remote Jobs — Work From Anywhere</h1>
+    <p>Curated remote opportunities from top companies worldwide</p>
     <div class="search-bar">
       <input type="text" id="searchInput" placeholder="Search jobs, skills, companies..." />
       <button onclick="filterJobs()">Search</button>
@@ -86,11 +86,13 @@ main { padding: 2rem 0; }
   <section class="filters">
     <div class="container">
       <button class="filter-btn active" onclick="filterByCategory('all')">All</button>
-      <button class="filter-btn" onclick="filterByCategory('engineering')">Engineering</button>
+      <button class="filter-btn" onclick="filterByCategory('software-dev')">Engineering</button>
       <button class="filter-btn" onclick="filterByCategory('design')">Design</button>
       <button class="filter-btn" onclick="filterByCategory('marketing')">Marketing</button>
       <button class="filter-btn" onclick="filterByCategory('product')">Product</button>
       <button class="filter-btn" onclick="filterByCategory('sales')">Sales</button>
+      <button class="filter-btn" onclick="filterByCategory('customer-support')">Support</button>
+      <button class="filter-btn" onclick="filterByCategory('writing')">Writing</button>
     </div>
   </section>
 
@@ -103,7 +105,7 @@ main { padding: 2rem 0; }
   <section class="newsletter" id="newsletter">
     <div class="container">
       <h2>Get Jobs in Your Inbox</h2>
-      <p>New remote startup jobs delivered every week</p>
+      <p>New remote jobs delivered every week — free</p>
       <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
         <input type="email" id="emailInput" placeholder="Enter your email address" required />
         <button type="submit">Subscribe Free</button>
@@ -115,15 +117,15 @@ main { padding: 2rem 0; }
   <section class="post-job" id="post-job">
     <div class="container">
       <h2>Post a Remote Job</h2>
-      <p>Reach thousands of talented professionals across India</p>
+      <p>Reach thousands of remote professionals worldwide</p>
       <form class="job-form" onsubmit="submitJob(event)">
         <div class="form-row">
           <input type="text" placeholder="Job Title *" required />
           <input type="text" placeholder="Company Name *" required />
         </div>
         <div class="form-row">
-          <input type="text" placeholder="Location (e.g. Bangalore / Pan India)" />
-          <input type="text" placeholder="Salary Range (e.g. ₹10–15 LPA)" />
+          <input type="text" placeholder="Location (e.g. Worldwide / India)" />
+          <input type="text" placeholder="Salary Range (e.g. $50k–$80k)" />
         </div>
         <select>
           <option value="">Select Category *</option>
@@ -132,6 +134,8 @@ main { padding: 2rem 0; }
           <option>Product</option>
           <option>Marketing</option>
           <option>Sales</option>
+          <option>Writing</option>
+          <option>Customer Support</option>
           <option>Operations</option>
           <option>Finance</option>
           <option>HR</option>
@@ -147,9 +151,9 @@ main { padding: 2rem 0; }
 
   <footer class="footer">
     <div class="container">
-      <p>🇮🇳 Remote Startup Jobs India · Built with ❤️ for Indian professionals</p>
+      <p>🇮🇳 Remote Jobs India · Built with ❤️ for remote professionals</p>
       <p>Jobs powered by <a href="https://remotive.com" target="_blank">Remotive</a></p>
-      <p><a href="about.html">About</a> · <a href="mailto:hello@remotestartupjobs.in">Contact</a></p>
+      <p><a href="about.html">About</a> · <a href="mailto:hello@remotejobsindia.in">Contact</a></p>
     </div>
   </footer>
 
