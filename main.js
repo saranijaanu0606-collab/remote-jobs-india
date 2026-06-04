@@ -1,28 +1,24 @@
-const REMOTIVE_API = 'https://remotive.com/api/remote-jobs?category=software-dev&limit=20';
+const REMOTIVE_API = 'https://remotive.com/api/remote-jobs?limit=50';
 
 let allJobs = [];
 
-// Auto-fetch jobs from Remotive API
 async function loadJobs() {
   try {
     document.getElementById('job-listings').innerHTML =
       '<p style="text-align:center;color:#777;padding:2rem;">Loading jobs...</p>';
-
     const res = await fetch(REMOTIVE_API);
     const data = await res.json();
-
     allJobs = data.jobs.map(job => ({
       id: job.id,
       title: job.title,
       company: job.company_name,
-      location: job.candidate_required_location || 'Remote',
-      category: job.category.toLowerCase().replace(/ /g, '-'),
-      salary: job.salary || 'Not specified',
+      location: job.candidate_required_location || 'Worldwide',
+      category: job.category ? job.category.toLowerCase().replace(/ /g, '-') : 'other',
+      salary: job.salary || 'Competitive',
       tags: job.tags ? job.tags.slice(0, 3) : [],
-      date: job.publication_date.split('T')[0],
+      date: job.publication_date ? job.publication_date.split('T')[0] : '',
       applyLink: job.url
     }));
-
     renderJobs(allJobs);
   } catch (err) {
     document.getElementById('job-listings').innerHTML =
@@ -62,8 +58,19 @@ function filterJobs() {
   const filtered = allJobs.filter(job =>
     job.title.toLowerCase().includes(query) ||
     job.company.toLowerCase().includes(query) ||
+    job.location.toLowerCase().includes(query) ||
     job.tags.some(t => t.toLowerCase().includes(query))
   );
+  renderJobs(filtered);
+}
+
+function filterByCategory(category) {
+  const buttons = document.querySelectorAll('.filter-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  const filtered = category === 'all'
+    ? allJobs
+    : allJobs.filter(j => j.category.includes(category));
   renderJobs(filtered);
 }
 
@@ -76,16 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-
-function filterByCategory(category) {
-  const buttons = document.querySelectorAll('.filter-btn');
-  buttons.forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-  const filtered = category === 'all'
-    ? allJobs
-    : allJobs.filter(j => j.category.includes(category));
-  renderJobs(filtered);
-}
 
 function subscribeNewsletter(e) {
   e.preventDefault();
