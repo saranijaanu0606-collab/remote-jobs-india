@@ -80,7 +80,13 @@ function renderJobs(jobs) {
   }
 
   jobs.forEach(job => {
-    const logoHTML = job.logo
+    const initial = job.company.charAt(0).toUpperCase();
+const logoHTML = job.logo
+  ? `<img src="${job.logo}" alt="${job.company}" 
+       onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+       style="width:48px;height:48px;object-fit:contain;border-radius:8px;border:1px solid #e2e8f0;padding:4px;margin-right:1rem;background:#fff;">
+     <div style="display:none;width:48px;height:48px;border-radius:8px;background:#4f46e5;color:#fff;align-items:center;justify-content:center;font-weight:bold;font-size:1.2rem;margin-right:1rem;flex-shrink:0;">${initial}</div>`
+  : `<div style="width:48px;height:48px;border-radius:8px;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.2rem;margin-right:1rem;flex-shrink:0;">${initial}</div>`;
       ? `<img src="${job.logo}" alt="${job.company}" style="width:48px;height:48px;object-fit:contain;border-radius:8px;border:1px solid #e2e8f0;padding:4px;margin-right:1rem;background:#fff;">`
       : `<div style="width:48px;height:48px;border-radius:8px;background:#e8f0fe;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-right:1rem;">🏢</div>`;
 
