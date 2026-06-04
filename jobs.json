@@ -31,5 +31,27 @@
     "tags": ["Figma", "Design", "Remote"],
     "date": "2025-06-03",
     "applyLink": "https://groww.in/careers"
+  },
+  {
+    "id": 4,
+    "title": "Growth Marketer",
+    "company": "Meesho",
+    "location": "Remote — India",
+    "category": "marketing",
+    "salary": "10–15 LPA",
+    "tags": ["SEO", "Paid Ads", "Remote"],
+    "date": "2025-06-04",
+    "applyLink": "https://meesho.com/careers"
+  },
+  {
+    "id": 5,
+    "title": "Backend Engineer",
+    "company": "CRED",
+    "location": "Remote — India",
+    "category": "engineering",
+    "salary": "20–28 LPA",
+    "tags": ["Node.js", "AWS", "Remote"],
+    "date": "2025-06-04",
+    "applyLink": "https://cred.club/careers"
   }
 ]
